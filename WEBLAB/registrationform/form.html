@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Student Registration Form</title>
+</head>
+<body>
+    <h3 align="center"><b>STUDENT REGISTRATION FORM</b></h3>
+   <form method="post" >
+<br>
+<br>
+    <table border="2" align="center">
+      <tr>
+        <th><label for="First name">FIRST NAME</label></th><td>
+         <input type="text" name="fname" maxlength=30>(max 30 characters)</td></tr>
+ <tr><th>
+    <label for="Last name" >LAST NAME</label></th><td> 
+        <input type="text" name="lname" maxlength=30>(max 30 characters)</td></tr>
+<tr><th>
+    <label for="dob" >DATE OF BIRTH</label> </th><td>
+        <input type="date" name="dob"></td></tr>
+<tr><th>
+    <label for="email" >EMAIL ID</label> </th><td>
+        <input type="email" name="email"></td></tr>
+<tr><th>
+    <label for="mob" >MOBILE NUMBER</label></th><td>
+         <input type="number" name="pnumber" maxlength=10>(10 digit number)</td></tr>
+<tr><th>
+    <label for="gender" >GENDER</label></th><td> 
+        <input type="radio" name="gender">Male<input type="radio" name="gender">Female</td></tr>
+<tr><th>
+    <label for="address" >ADDRESS</label></th><td>
+        <textarea rows="5" cols="30"> </textarea></td></tr>
+<tr><th>
+    <label for="city" >CITY</label> </th><td>
+        <input type="text" name="city" maxlength=30>(max 30 characters)</td></tr>
+<tr><th>
+    <label for="pin" >PINCODE</label> </th><td>
+        <input type="number" name="pin" maxlength=6>(6 digit number)</td></tr>
+<tr><th>
+    <label for="state" >STATE</label></th><td> 
+        <input type="text" name="state" maxlength=30>(max 30 characters)</td></tr>
+<tr><th>
+    <label for="country" >COUNTRY</label> </th><td>
+        <input type="text" name="country" placeholder="India"></td></tr>
+<tr><th>
+    <label for="hobbies" >HOBBIES</label></th><td>Drawing
+        <input type="checkbox" name="drawing"> Singing<input type="checkbox" name="singing"> Dancing<input type="checkbox" name="dancing"> Sketching<input type="checkbox" name="sketching">
+<br>others<input type="checkbox" name="others"><input type="text"></tr>
+<tr>
+<th>QUALIFICATION</th><td>
+    <table border="1"><th>Sl No.</th><th>Examination</th><th>Board</th><th>Percentage</th><th>Year of Passing</th></tr>
+<td>1</td><td>Class X</td><td>
+    <input type="text" maxlength="10"></td><td><input type="number"></td><td><input type="year"></td></tr>
+<td>2</td><td>Class XII</td><td>
+    <input type="text" maxlength="10"></td><td><input type="number"></td><td><input type="year"></td></tr>
+<td>3</td><td>Graduation</td><td>
+    <input type="text" maxlength="10"></td><td><input type="number"></td><td><input type="year"></td></tr>
+<td>4</td><td>Masters</td><td>
+    <input type="text" maxlength="10"></td>
+    <td><input type="number"></td>
+    <td><input type="year"></td>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td align="center">(10 char max)</td>
+    <td align="center">(upto 2 decimal)</td>
+    <td></td>
+</tr>
+</table>
+</td></tr>
+<tr><th><label for="courses">COURSES <br> APPLIED FOR</label></th><td> MCA<input type="radio" name="course"> M.Tech<input type="radio" name="course"> M.sc<input type="radio" name="course"> PhD<input type="radio" name="course"></td></tr>
+<tr><th>
+    <label for="password" >TYPE YOUR PASSWORD</label> </th><td>
+        <input type="password" name="password" maxlength=30>(max 30 characters)</td></tr>
+<tr><th>
+    <label for="photo" >UPLOAD YOUR PHOTO</label> </th><td>
+        <input type="file" name="file"></td></tr>
+<tr><th>
+    <label for="tc" >DATE OF TC</label> </th><td>
+        <input type="date" name="tc"></td></tr>
+<td colspan="2"><center>
+    <input type="button" value="Submit"><input type="button" value="Reset"></center></td>
+</table>
+</form>
+</body>
+</html>

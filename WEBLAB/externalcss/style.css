@@ -1,0 +1,39 @@
+p
+{
+text-align: left;
+}
+#para1
+{
+color: white;
+background-color: #2ab3b4;
+}
+.center
+{
+color :black;
+background-color: #08b463;
+}
+
+*
+{
+text-align: left;
+background-color: #004a44;
+}
+h1,h2
+{
+text-align: left;
+color: black;
+background-color: #798a7d;
+}
+p
+{
+text-align: justify;
+}
+.second
+{
+text-align: justify;
+background-color: #df0d23;
+}
+#para2
+{
+color:green;
+}
