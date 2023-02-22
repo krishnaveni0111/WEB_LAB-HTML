@@ -1,0 +1,437 @@
+1. home1.php
+
+
+<html>
+<head>
+<style>
+body {
+ 	 background-image: url('libr.png');
+	 background-repeat: no-repeat;
+	background-attachment: fixed;
+        background-size: cover;	
+	}
+table{
+border-style: hidden;
+}
+ 
+input[type=submit] {
+  background-color: #696969;
+  border: none;
+  color: white;
+  font-size: 30px;	
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+	</style>
+</head>
+<body>
+	 <br><br>
+     	<br><br>
+	<br><br>
+     	<br><br>
+	br><br>
+     	<br><br>
+	
+     	<table align="center" cellpadding='8' width="50%" ">
+	<tr>
+	<td colspan="2"><center><form action="insertbook.php" method="POST">
+       	<input type="submit" value="Add Books" name="btn">
+   	 </form></td>
+	
+	<td><b><form action="updatebook.php" method="POST">  		
+    	<input type="submit" value="Update Books" name="btn">
+    	</form></b></td>
+		
+	<td><form action="deletebook.php" method="POST"> 
+		
+    	<input type="submit" value="Delete Books" name="btn">
+    	</form></center></td>
+	<td><form action="displayall.php" method="POST"> 		
+    	<input type="submit" value="Display All Bookdetails" name="btn">
+    	</form></center></td>
+	</tr>	
+	</table>  
+     
+
+
+    </center> 
+	
+	
+    </body>
+</html>
+
+2. insertbook.php
+
+
+<html>
+	<head>
+	<title>Insert Book</title>
+	<style>
+	input[type=text], input[type=number]
+	{
+	width:100%;
+	}
+	body {
+ 	 background-image: url('book1.jpg');
+	 background-repeat: no-repeat;
+	background-attachment: fixed;
+        background-size: cover;	
+	}
+	</style>
+	</head>
+	<body>
+	<form name method="POST">
+	<br><br><br>
+	<table align="center" cellpadding='8' width="50%" border>
+	<tr>
+	<th colspan="2"><center>Add BOOK Details</center></th>
+	</tr>
+	<tr>
+	<td><b>Accession number</b></td>
+	<td><input type="number" name="accessno"></td>
+	</tr>
+	<tr>
+	<td><b>Title</b></td>
+	<td><input type="text" name="title"></td>
+	</tr>
+	<tr>
+	<td><b>Author</b></td>
+	<td><input type="text" name="author"></td>
+	</tr>
+	<tr>
+	<td><b>Edition</b></td>
+	<td><input type="text" name="edition"></td>
+	</tr>
+	<tr>
+	<td><b>Publisher</b></td>
+	<td><input type="text" name="publisher"></td>
+	</tr>
+	<tr>
+	<td colspan="2"><center><input type="submit" name="submit"></center></td>
+	</tr>
+	</table>
+	</form>
+	<form method="POST">
+	<table align="center" cellpadding='8' width="50%" border>
+	<tr>
+	<th colspan="2"><center>Search BOOK</center></th>
+	</tr>
+	<tr>
+	<td><b>Title</b></td>
+	<td><input type="text" name="stitle"></td>
+	</tr>
+	<tr>
+	<td colspan="2"><center><input type="submit" name="ssubmit"></center></td>
+	</tr>
+	<tr>
+	<td colspan="2"><center><input type="submit" value="Home"name="sssubmit"></center></td>
+	</tr>
+	</table>
+	</form>
+	</body>
+	</html>
+	<?php
+	include'conn.php';
+	if(isset($_POST["submit"]))
+	{
+	$accessno=$_POST["accessno"];
+	$title=$_POST["title"];
+	$author=$_POST["author"];
+	$edition=$_POST["edition"];
+	$publisher=$_POST["publisher"];
+	$sql = "INSERT INTO book (accessno, title, author, edition, publisher) VALUES ('$accessno', '$title', '$author', '$edition', '$publisher')";
+	if ($conn->query($sql) === TRUE)
+	{
+	echo"<script>alert ('Details added successfully!');</script>";
+	}
+	else
+	{
+	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+	}
+	if(isset($_POST["ssubmit"]))
+	{
+	$stitle=$_POST["stitle"];
+	$sqlreturn = "SELECT * FROM `book` WHERE title='$stitle'";
+	$result_1=mysqli_query($conn,$sqlreturn);
+	if (mysqli_num_rows($result_1)>0)
+	{
+	// output data of each row
+	while($row=mysqli_fetch_assoc($result_1))
+	{
+	echo"<table align='center' cellpadding='8' width='50%' border>";
+	echo"<tr><th colspan='2'><center>BOOK Details</center></th></tr>";
+	echo"<tr><td>Accession number</td><td>" . $row["accessno"]."</td></tr>";
+	echo"<tr><td>Title</td><td>" . $row["title"]."</td></tr>";
+	echo"<tr><td>Author</td><td>" . $row["author"]."</td></tr>";
+	echo"<tr><td>Edition</td><td>" . $row["edition"]."</td></tr>";
+	echo"<tr><td>Publisher</td><td>" . $row["publisher"]."</td></tr>";
+	echo"</table>";
+	}
+	}
+	else
+	{
+	echo "No record" . "<br>" . mysqli_error($conn);
+	}
+	}
+	if(isset($_POST["sssubmit"]))
+	{
+	header("Location: home1.php");
+	}
+	mysqli_close($conn);
+	?>
+ 3. deletebook.php
+
+<html>
+	<head>
+	<title>Delete Book</title>
+	<style>
+	input[type=text], input[type=number]
+	{
+	width:100%;
+	}
+	body {
+ 	 background-image: url('book1.jpg');
+	 background-repeat: no-repeat;
+	background-attachment: fixed;
+        background-size: cover;	
+	}
+	</style>
+<body>
+
+<center><br><br>
+<form method="POST">
+	<table align="center" cellpadding='8' width="50%" border>
+	<tr>
+	<th colspan="2"><center>Delete BOOK</center></th>
+	</tr>
+	<tr>
+	<td><b>Enter Book Title:</b></td>
+	<td><input type="text" name="title"></td>
+	</tr>
+	<tr>
+	<td colspan="2"><center><input type="submit" value="Delete" name="delete"></center></td>
+	</tr>
+	</form>
+	<form action="home1.php">
+	<tr>
+	<td colspan="2"><center><input type="submit" value="Home"name="home"></center></td>
+	</tr>
+	</table>
+	</form>
+</html>
+
+<?php
+	include'conn.php';
+	if(isset($_POST["delete"]))
+	{
+	$title1=$_POST['title'];
+ 	$sql_3="DELETE FROM book WHERE title='$title1'";
+ 	$result_3=mysqli_query($conn,$sql_3);
+ 	if(!$result_3)
+ 	{
+ 	 $msg="Error !!!".mysqli_error($conn);
+ 	}
+ 	else
+	{
+ 	echo"deletion success!!!";
+	}
+	}
+	
+	
+	mysqli_close($conn);
+	?>
+
+4. updatebook.php
+
+
+<html>
+	<head>
+	<title>Update Book</title>
+	<style>
+	input[type=text], input[type=number]
+	{
+	width:100%;
+	}
+	body {
+ 	 background-image: url('book1.jpg');
+	 background-repeat: no-repeat;
+	background-attachment: fixed;
+        background-size: cover;	
+	}
+	</style>
+	</head>
+	<body>
+		
+	<form method="POST">
+	<br><br>
+	<table align="center" cellpadding='8' width="50%" border>
+	<tr>
+	<th colspan="2"><center>Accession Number to Update </center></th>
+	</tr>
+	<tr>
+	<td><b>Accession Number</b></td>
+	<td><input type="text" name="accessno"></td>
+	</tr>
+	<tr>
+	<td colspan="2"><center><input type="submit" name="ssubmit"></center></td>
+	</tr>
+	<tr>
+	<td colspan="2"><center><input type="submit" value="Home"name="sssubmit"></center></td>
+	</tr>
+	</table>
+	</form>
+	</body>
+	</html>
+	<?php
+	include'conn.php';
+	
+	if(isset($_POST["ssubmit"]))
+	{
+	$accno=$_POST["accessno"];
+	$sqlreturn = "SELECT * FROM book WHERE accessno='$accno'";
+	$result_1=mysqli_query($conn,$sqlreturn);
+	if (mysqli_num_rows($result_1)>0)
+	{
+	// output data of each row
+	while($row=mysqli_fetch_assoc($result_1))
+
+	{
+
+	?>
+	<form method="POST">
+	<table align='center' cellpadding='8' width='50%' border>
+	<tr><th colspan='2'><center>Update Book Details</center></th></tr>
+	<tr><td><b>Title</b><input type="text" name="accno"value="<?php echo( ($row["accessno"]) ); ?>" /></td></tr>
+ 	<tr><td><b>Title</b><input type="text" name="title"value="<?php echo( htmlspecialchars($row["title"]) ); ?>" /></td></tr>
+	<tr><td><b>Author</b><input type="text" name="author" value="<?php echo( htmlspecialchars($row["author"]) ); ?>" /></td></tr>
+	<tr><td><b>Edition</b><input type="text" name="edition" value="<?php echo( htmlspecialchars($row["edition"]) ); ?>" /></td></tr>
+ 	<tr><td><b>Publisher</b><input type="text" name="publisher"value="<?php echo( htmlspecialchars( $row["publisher"]) ); ?>" /></td></tr>
+	<tr>
+	<td colspan="2"><center><input type="submit"value="Edit" name="submit1"></center></td>
+	</tr>
+	</table>
+ 	</form>
+ 	<?php
+	
+	}
+	}
+			
+	else
+	{
+	echo "No record" . "<br>" . mysqli_error($conn);
+	}
+	}
+	if(isset($_POST["submit1"]))
+	{
+	$accno1=$_POST["accno"];
+	$title=$_POST["title"];
+	$author=$_POST["author"];
+	$edition=$_POST["edition"];
+	$publisher=$_POST["publisher"];
+	$sql = "UPDATE book SET title='$title',author='$author',edition='$edition',publisher='$publisher' WHERE accessno='$accno1'";
+	if ($conn->query($sql) === TRUE)
+	{
+	echo"<script>alert ('Details Updated successfully!');</script>";
+	
+	}
+	
+	else
+	{
+	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+	
+	}
+	else
+	{
+	echo "No record" . "<br>" . mysqli_error($conn);
+	}
+	
+	if(isset($_POST["sssubmit"]))
+	{
+	header("Location: home1.php");
+	}
+	mysqli_close($conn);
+	?>
+
+5. displayall.php
+
+<html>
+	<head>
+	<title>Display All</title>
+	<style>
+	input[type=text], input[type=number]
+	{
+	width:100%;
+	}
+	body {
+ 	 background-image: url('book1.jpg');
+	 background-repeat: no-repeat;
+	background-attachment: fixed;
+        background-size: cover;	
+	}
+	
+	</style>
+	</head>
+<body>
+<form action="home1.php" method="POST">
+<br><br>
+<?php
+ include'conn.php';
+ $sql_4="SELECT * FROM book";
+ $result_4=mysqli_query($conn,$sql_4);
+ if(mysqli_num_rows($result_4)>0)
+ {
+ $n=1;
+	
+  while($row=mysqli_fetch_assoc($result_4))
+ {
+?>
+   	<table  "cellpadding='8' width='20%' border>
+	<tr><th colspan='2'>Display Book <?php echo $n; ?></th></tr>
+	<tr><td><b>Title</b><input type="text" name="accno"value="<?php echo( ($row["accessno"]) ); ?>" /></td></tr>
+ 	<tr><td><b>Title</b><input type="text" name="title"value="<?php echo( htmlspecialchars($row["title"]) ); ?>" /></td></tr>
+	<tr><td><b>Author</b><input type="text" name="author" value="<?php echo( htmlspecialchars($row["author"]) ); ?>" /></td></tr>
+	<tr><td><b>Edition</b><input type="text" name="edition" value="<?php echo( htmlspecialchars($row["edition"]) ); ?>" /></td></tr>
+ 	<tr><td><b>Publisher</b><input type="text" name="publisher"value="<?php echo( htmlspecialchars( $row["publisher"]) ); ?>" /></td></tr>
+	
+	
+<?php
+	$n++;
+ }
+?>
+</table>
+<?php
+}
+mysqli_close($conn);
+?>
+<br><br>
+<input type="submit" value="Home Page" name="btn">
+
+</form>
+</body>
+</html>
+
+
+6.conn.php
+
+
+<?php
+	$servername='localhost';
+	$username='root';
+	$password='';
+	$dbname = "abhimanyu";
+
+	$conn=mysqli_connect($servername,$username,$password,$dbname);
+	if(!$conn){
+   		die('Could not Connect My Sql:' .mysql_error());
+
+	}
+	else
+	{
+ 		echo "Database connected";
+	}
+	?>
